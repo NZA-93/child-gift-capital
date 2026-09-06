@@ -4,7 +4,7 @@
   var STORAGE_KEY = "gift-capital-draft-v1";
 
   var PRESETS = [
-    { id: "growth", label: "All global growth", growth: 100, balanced: 0, steady: 0, parents: 0 },
+    { id: "growth", label: "All growth", growth: 100, balanced: 0, steady: 0, parents: 0 },
     { id: "mostly", label: "Mostly growth", growth: 70, balanced: 20, steady: 10, parents: 0 },
     { id: "balanced", label: "All balanced", growth: 0, balanced: 100, steady: 0, parents: 0 },
     { id: "steady", label: "All steady", growth: 0, balanced: 0, steady: 100, parents: 0 },
@@ -97,7 +97,28 @@
     state.preset = matchPreset(state) || "custom";
   }
 
+  function accountIsLive() {
+    return Boolean(
+      cfg.accountReady &&
+        cfg.ibanDisplay &&
+        cfg.ibanCompact &&
+        cfg.bic &&
+        cfg.accountHolder
+    );
+  }
+
   function fillAccountFields() {
+    var live = accountIsLive();
+    $all("[data-waiting-block]").forEach(function (el) {
+      el.hidden = live;
+    });
+    $all("[data-waiting-field]").forEach(function (el) {
+      el.hidden = live;
+    });
+    $all("[data-live-account]").forEach(function (el) {
+      el.hidden = !live;
+    });
+    if (!live) return;
     $all("[data-iban]").forEach(function (el) {
       el.textContent = cfg.ibanDisplay;
     });
@@ -275,23 +296,36 @@
       btn.addEventListener("click", function () {
         var kind = btn.getAttribute("data-copy");
         var result = encoded();
+        var live = accountIsLive();
         var map = {
-          iban: cfg.ibanCompact,
-          bic: cfg.bic,
-          holder: cfg.accountHolder,
+          iban: live ? cfg.ibanCompact : "",
+          bic: live ? cfg.bic : "",
+          holder: live ? cfg.accountHolder : "",
           reference: result.ok ? result.code : "",
           slip: result.ok
-            ? [
-                "Gift capital — SEPA transfer slip",
-                cfg.placeholderNotice,
-                "",
-                "Recipient: " + cfg.accountHolder,
-                "IBAN: " + cfg.ibanDisplay,
-                "BIC: " + cfg.bic,
-                "Bank: " + cfg.bankName,
-                "Reference / Verwendungszweck: " + result.code,
-                "Preference: " + Ref.summarize(result.alloc),
-              ].join("\n")
+            ? live
+              ? [
+                  "Gift capital — SEPA transfer note",
+                  "",
+                  "Recipient: " + cfg.accountHolder,
+                  "IBAN: " + cfg.ibanDisplay,
+                  "BIC: " + cfg.bic,
+                  "Bank: " + cfg.bankName,
+                  "Reference / Verwendungszweck: " + result.code,
+                  "Wish: " + Ref.summarize(result.alloc),
+                  "",
+                  "These are wishes parents may follow — not a trade order, and not investment advice.",
+                ].join("\n")
+              : [
+                  "Gift capital — preference note",
+                  cfg.waitNotice || "Do not transfer yet. Konto folgt.",
+                  "",
+                  "Preference code (for later Verwendungszweck): " + result.code,
+                  "Wish: " + Ref.summarize(result.alloc),
+                  "",
+                  "These are wishes parents may follow — not a trade order, and not investment advice.",
+                  "Do not transfer yet. Konto folgt.",
+                ].join("\n")
             : "",
         };
         var value = map[kind] || "";

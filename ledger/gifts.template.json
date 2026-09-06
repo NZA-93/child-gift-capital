@@ -2,25 +2,26 @@
   "title": "Gift capital parent ledger (template)",
   "version": "GC1",
   "account": {
-    "iban": "DE00 0000 0000 0000 0000 00",
-    "iban_status": "PLACEHOLDER — TO BE REPLACED",
-    "bic": "XXXXXXXXXXX",
-    "holder": "TO BE REPLACED — account holder",
+    "iban": "",
+    "iban_status": "Konto folgt — do not transfer yet",
+    "bic": "",
+    "holder": "",
     "currency": "EUR"
   },
   "how_to_use": [
     "Copy this file to gifts.json (do not commit real donor names if the repo is public).",
+    "Do not invent placeholder IBANs in this public repo.",
     "When a SEPA credit arrives, add a row with the bank fields.",
     "Copy the Verwendungszweck into preference_code and decode it on ledger.html or with js/reference.js.",
     "Fill sleeve percentages from the decoded code. The four percentages must sum to 100."
   ],
   "gifts": [
     {
-      "booked_on": "2026-01-12",
-      "amount_eur": 150.0,
+      "booked_on": "",
+      "amount_eur": null,
       "currency": "EUR",
-      "counterparty_name": "Example Donor",
-      "counterparty_iban": "DE11100100101234567890",
+      "counterparty_name": "",
+      "counterparty_iban": "",
       "bank_reference": "GC1-070-020-010-000-K7MM",
       "preference_code": "GC1-070-020-010-000-K7MM",
       "token": "K7MM",
@@ -31,8 +32,8 @@
         "parents": 0
       },
       "checksum_ok": true,
-      "status": "matched",
-      "notes": "Sample row — delete before use"
+      "status": "example",
+      "notes": "Example preference only — delete before use. No account numbers on purpose."
     }
   ]
 }

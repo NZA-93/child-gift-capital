@@ -40,8 +40,8 @@
           <h1>A gift that can grow quietly from the start.</h1>
           <p class="lede">
             This is a preference desk and a story — not a shop, not a broker, and not a place that takes your card.
-            You send a SEPA transfer to a dedicated account, and you say how you would like that gift allocated
-            across a few simple sleeves. Parents hold the account as custodians and invest later, in their own time.
+            You say how you would like a gift allocated across a few simple sleeves. Parents, as custodians, look
+            after the capital later. Until the dedicated Juniorkonto is open, please do not transfer money.
           </p>
           <div class="actions">
             <a class="btn" href="#allocate">Choose an allocation</a>
@@ -60,9 +60,9 @@
           </p>
           <p>
             The child is not named here on purpose. The branding stays generic:
-            <strong>gift capital for a little one</strong>. The account is held by parents who are German tax
-            residents, as custodians. Your allocation is a wish they can see and honour — not an order, and not
-            a purchase of securities through this site.
+            <strong>gift capital for a little one</strong>. Parents hold any future account as custodians.
+            Your allocation is a wish they may follow — not an order, and not a way to buy a sleeve or any
+            security through this site.
           </p>
         </div>
       </section>
@@ -78,17 +78,18 @@
             </article>
             <article class="card">
               <span class="step-num">Step 2</span>
-              <h3>Copy the reference</h3>
+              <h3>Save the preference code</h3>
               <p>
-                The site writes your wish into a short transfer code. Nothing is sent to a server — it stays in
-                your browser and in the bank reference.
+                The site writes your wish into a short code. Nothing is sent to a server — it stays in this
+                browser, and later it can go in a bank reference.
               </p>
             </article>
             <article class="card">
               <span class="step-num">Step 3</span>
-              <h3>Transfer from your bank</h3>
+              <h3>Wait for the account</h3>
               <p>
-                Use your own bank’s SEPA transfer to the dedicated IBAN. This website never processes a payment.
+                Do not transfer yet. <span lang="de">Konto folgt.</span> When the Juniorkonto is published,
+                you can send a SEPA transfer from your own bank. This website never processes a payment.
               </p>
             </article>
           </div>
@@ -98,27 +99,23 @@
       <section class="section" id="sleeves" aria-labelledby="sleeves-title">
         <div class="wrap">
           <h2 id="sleeves-title">The four sleeves</h2>
-          <p class="lede">Parents execute investments later. These labels are a shared language for your preference.</p>
+          <p class="lede">Parents, as custodians, invest later. These labels are a shared language for your wish — not something you buy here.</p>
           <div class="grid-2">
             <article class="card sleeve-card">
-              <p class="meta">Higher long-run risk</p>
-              <h3>Global growth</h3>
-              <p>A broad world equity ETF sleeve — the long path, with more weather along the way.</p>
+              <h3>Growth</h3>
+              <p>Mostly global equity ETFs. Higher ups and downs; built for decades.</p>
             </article>
             <article class="card sleeve-card">
-              <p class="meta">Equity and bonds together</p>
               <h3>Balanced</h3>
-              <p>A mix of equities and bonds, for people who want growth with a quieter middle.</p>
+              <p>Stocks and bonds together. Medium swings; smoother than Growth.</p>
             </article>
             <article class="card sleeve-card">
-              <p class="meta">Calmer path</p>
               <h3>Steady</h3>
-              <p>Bonds and cash-oriented holdings. Less drama, less long-run growth in ordinary years.</p>
+              <p>Bonds / cash-like. Lower swing; slower growth.</p>
             </article>
             <article class="card sleeve-card">
-              <p class="meta">Leave the mix</p>
               <h3>Parents decide</h3>
-              <p>You give the capital and leave the allocation to the custodians. That is a complete choice.</p>
+              <p>Leave the mix to the parents. They’ll allocate as custodians.</p>
             </article>
           </div>
         </div>
@@ -135,7 +132,7 @@
           <div class="card panel">
             <p class="kicker">Presets</p>
             <div class="presets" role="group" aria-label="Allocation presets">
-              <button type="button" class="chip" data-preset="growth">All global growth</button>
+              <button type="button" class="chip" data-preset="growth">All growth</button>
               <button type="button" class="chip" data-preset="mostly">Mostly growth</button>
               <button type="button" class="chip" data-preset="balanced">All balanced</button>
               <button type="button" class="chip" data-preset="steady">All steady</button>
@@ -147,13 +144,13 @@
             <p class="sr-only" data-summary></p>
 
             <div class="sleeve-row">
-              <label for="pct-growth">Global growth</label>
+              <label for="pct-growth">Growth</label>
               <div class="pct">
                 <input id="pct-growth" data-sleeve="growth" type="number" min="0" max="100" step="1" value="70" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
               </div>
-              <p class="hint">Broad world equity ETF sleeve.</p>
-              <label class="sr-only" for="range-growth">Global growth slider</label>
+              <p class="hint">Mostly global equity ETFs. Higher ups and downs; built for decades.</p>
+              <label class="sr-only" for="range-growth">Growth slider</label>
               <input id="range-growth" data-sleeve="growth" type="range" min="0" max="100" step="1" value="70" />
             </div>
 
@@ -163,7 +160,7 @@
                 <input id="pct-balanced" data-sleeve="balanced" type="number" min="0" max="100" step="1" value="20" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
               </div>
-              <p class="hint">Mix of equities and bonds.</p>
+              <p class="hint">Stocks and bonds together. Medium swings; smoother than Growth.</p>
               <label class="sr-only" for="range-balanced">Balanced slider</label>
               <input id="range-balanced" data-sleeve="balanced" type="range" min="0" max="100" step="1" value="20" />
             </div>
@@ -174,7 +171,7 @@
                 <input id="pct-steady" data-sleeve="steady" type="number" min="0" max="100" step="1" value="10" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
               </div>
-              <p class="hint">Bonds and cash-oriented.</p>
+              <p class="hint">Bonds / cash-like. Lower swing; slower growth.</p>
               <label class="sr-only" for="range-steady">Steady slider</label>
               <input id="range-steady" data-sleeve="steady" type="range" min="0" max="100" step="1" value="10" />
             </div>
@@ -185,7 +182,7 @@
                 <input id="pct-parents" data-sleeve="parents" type="number" min="0" max="100" step="1" value="0" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
               </div>
-              <p class="hint">Leave the allocation to the custodians.</p>
+              <p class="hint">Leave the mix to the parents. They’ll allocate as custodians.</p>
               <label class="sr-only" for="range-parents">Parents decide slider</label>
               <input id="range-parents" data-sleeve="parents" type="range" min="0" max="100" step="1" value="0" />
             </div>
@@ -195,6 +192,7 @@
               <span><span data-total>100</span>%</span>
             </div>
             <p class="note" data-total-hint aria-live="polite">Ready — the mix adds up to 100%.</p>
+            <p class="wish-note">These are wishes parents may follow — not a trade order, and not investment advice.</p>
           </div>
         </div>
       </section>
@@ -203,68 +201,86 @@
         <div class="wrap">
           <h2 id="give-title">How to give</h2>
           <p class="lede">
-            Open your own bank app. Send a SEPA credit transfer. Paste the preference code as the
-            reference (<span lang="de">Verwendungszweck</span>) so parents can match the gift in their ledger.
+            <strong>Do not transfer yet.</strong>
+            <span lang="de">Konto folgt.</span>
+            The dedicated Juniorkonto is not open. This page will show live transfer details only when that
+            account exists — never a made-up IBAN. You can still save a preference code for later.
           </p>
 
           <div class="card transfer">
-            <span class="placeholder-stamp">Placeholder — to be replaced</span>
-            <p class="warn">
-              <strong>Not a live account</strong>
-              <span data-holder>TO BE REPLACED — account holder</span>. IBAN and BIC below are fake German-format
-              placeholders. Do not send money until the family publishes a real dedicated IBAN.
-            </p>
+            <div data-waiting-block>
+              <span class="placeholder-stamp">Konto folgt</span>
+              <p class="warn">
+                <strong>Do not transfer yet</strong>
+                No IBAN or BIC is published here. Please do not send money. When the Juniorkonto is ready,
+                parents will publish the real account on this page.
+              </p>
+            </div>
+
+            <div data-live-account hidden>
+              <dl>
+                <div class="field">
+                  <dt>Recipient / Empfänger</dt>
+                  <dd>
+                    <span data-holder></span>
+                    <button type="button" class="copy-btn" data-copy="holder">Copy</button>
+                  </dd>
+                </div>
+                <div class="field">
+                  <dt>IBAN</dt>
+                  <dd>
+                    <span data-iban></span>
+                    <button type="button" class="copy-btn" data-copy="iban">Copy</button>
+                  </dd>
+                </div>
+                <div class="field">
+                  <dt>BIC</dt>
+                  <dd>
+                    <span data-bic></span>
+                    <button type="button" class="copy-btn" data-copy="bic">Copy</button>
+                  </dd>
+                </div>
+                <div class="field">
+                  <dt>Bank</dt>
+                  <dd><span data-bank></span></dd>
+                </div>
+              </dl>
+            </div>
 
             <dl>
-              <div class="field">
-                <dt>Recipient / Empfänger</dt>
-                <dd>
-                  <span data-holder>TO BE REPLACED — account holder</span>
-                  <button type="button" class="copy-btn" data-copy="holder">Copy</button>
-                </dd>
-              </div>
-              <div class="field">
+              <div class="field is-disabled" data-waiting-field>
                 <dt>IBAN</dt>
-                <dd>
-                  <span data-iban>DE00 0000 0000 0000 0000 00</span>
-                  <button type="button" class="copy-btn" data-copy="iban">Copy</button>
-                </dd>
+                <dd><span class="muted-value">Konto folgt — not published</span></dd>
               </div>
-              <div class="field">
+              <div class="field is-disabled" data-waiting-field>
                 <dt>BIC</dt>
-                <dd>
-                  <span data-bic>XXXXXXXXXXX</span>
-                  <button type="button" class="copy-btn" data-copy="bic">Copy</button>
-                </dd>
+                <dd><span class="muted-value">Konto folgt — not published</span></dd>
               </div>
               <div class="field">
-                <dt>Bank</dt>
-                <dd><span data-bank>TO BE REPLACED — bank name</span></dd>
-              </div>
-              <div class="field">
-                <dt>Reference / Verwendungszweck</dt>
+                <dt>Preference code / later Verwendungszweck</dt>
                 <dd>
-                  <span class="code-block" data-reference aria-live="polite">GC1-070-020-010-000-XXXX</span>
+                  <span class="code-block" data-reference aria-live="polite">—</span>
                   <button type="button" class="copy-btn" data-copy="reference">Copy</button>
                 </dd>
               </div>
             </dl>
 
             <p class="note" data-when-ready>
-              This code is your allocation, written for a bank statement. Keep it exactly as shown.
+              Keep this code. When the account is published, paste it as the transfer reference so parents can
+              match your wish. It is not a trade ticket.
             </p>
             <p class="warn" data-needs-100 hidden>
-              The reference appears when the four sleeves add up to 100%.
+              The preference code appears when the four sleeves add up to 100%.
             </p>
 
             <div class="actions" style="margin-top: 1.1rem">
-              <button type="button" class="btn" data-copy="slip">Copy all transfer details</button>
+              <button type="button" class="btn" data-copy="slip">Copy preference note</button>
               <button type="button" class="btn btn-secondary" data-new-draft>New preference code</button>
             </div>
             <p class="note">
-              Format: <code>GC1-GGG-BBB-SSS-PPP-TTTT</code> — global, balanced, steady, parents (percentages),
+              Format: <code>GC1-GGG-BBB-SSS-PPP-TTTT</code> — growth, balanced, steady, parents (percentages),
               then a short token. Example: <code>GC1-070-020-010-000-K7MM</code> means 70% growth, 20% balanced,
-              10% steady. Parents match this to the incoming transfer in
+              10% steady. Parents can decode it in
               <a href="ledger.html">the ledger helper</a>.
             </p>
           </div>
@@ -282,9 +298,9 @@
       </div>
       <div class="wrap legal">
         <p>
-          This site does not give investment advice and does not buy or sell securities. It does not process
-          payments, cards, or wallets. Parents remain the custodians; allocation codes are preferences, not
-          instructions to a broker.
+          This site is not a brokerage. It does not give investment advice and does not buy or sell securities.
+          Donors do not buy a sleeve here. It does not process payments, cards, or wallets. Parents remain the
+          custodians; allocation codes are wishes, not trade orders.
         </p>
         <p lang="de">
           Keine Anlageberatung. Kein Wertpapierkauf über diese Seite. Keine Zahlungsabwicklung.

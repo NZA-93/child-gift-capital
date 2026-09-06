@@ -16,7 +16,7 @@
     /^GC1-(\d{3})-(\d{3})-(\d{3})-(\d{3})-([0-9A-HJ-NP-TV-Z]{4})$/;
 
   var SLEEVES = [
-    { key: "growth", id: "g", short: "G", label: "Global growth" },
+    { key: "growth", id: "g", short: "G", label: "Growth" },
     { key: "balanced", id: "b", short: "B", label: "Balanced" },
     { key: "steady", id: "s", short: "S", label: "Steady" },
     { key: "parents", id: "p", short: "P", label: "Parents decide" },

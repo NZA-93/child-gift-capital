@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parent ledger helper — Gift capital</title>
+    <meta
+      name="description"
+      content="Decode a gift-capital transfer reference and match it to the parent ledger templates."
+    />
+    <meta name="theme-color" content="#ebe4d4" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="wordmark" href="index.html">Gift capital</a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#give">How to give</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="ledger.html" aria-current="page">Ledger</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="section">
+      <div class="wrap">
+        <p class="kicker">For custodians</p>
+        <h1 class="page-title">Match a transfer to a preference</h1>
+        <p class="lede">
+          Paste the <span lang="de">Verwendungszweck</span> from the bank statement. This page only decodes
+          the code in your browser — it does not talk to the bank.
+        </p>
+
+        <form id="decode-form" class="card" style="margin-bottom: 1.2rem">
+          <label for="reference-input"><strong>Transfer reference</strong></label>
+          <div class="input-row">
+            <input
+              id="reference-input"
+              name="reference"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="GC1-070-020-010-000-K7MM"
+            />
+            <button type="submit" class="btn">Decode</button>
+          </div>
+          <p class="note">
+            Templates:
+            <a href="ledger/gifts.template.csv">CSV</a>
+            ·
+            <a href="ledger/gifts.template.json">JSON</a>
+            ·
+            <a href="ledger/README.md">matching notes</a>
+          </p>
+        </form>
+
+        <div id="decode-out" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <a class="wordmark" href="index.html">Gift capital</a>
+        <nav class="nav-links" aria-label="Footer">
+          <a href="privacy.html">Privacy</a>
+          <a href="ledger.html" aria-current="page">Parent ledger</a>
+        </nav>
+      </div>
+      <div class="wrap legal">
+        <p>
+          This helper does not give investment advice and does not buy or sell securities. It does not
+          process payments.
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/reference.js"></script>
+    <script src="js/ledger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gift capital — a preference desk for long-horizon gifts</title>
+    <meta
+      name="description"
+      content="A quiet way for family and friends to gift money toward a little one’s long-horizon capital, and to say how they would like that gift looked after. Not a broker. Not a payment processor."
+    />
+    <meta name="theme-color" content="#ebe4d4" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="wordmark" href="index.html">
+          <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#3d5c45" />
+            <path d="M32 48c0-10 4-16 10-20" fill="none" stroke="#f4efe4" stroke-width="3.2" stroke-linecap="round" />
+            <path d="M32 48c0-11-5-18-12-22" fill="none" stroke="#d7c4a3" stroke-width="3.2" stroke-linecap="round" />
+            <circle cx="32" cy="18" r="4.2" fill="#f4efe4" />
+          </svg>
+          Gift capital
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#allocate">Allocate</a>
+          <a href="#give">How to give</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="kicker">For family and friends</p>
+          <h1>A gift that can grow quietly from the start.</h1>
+          <p class="lede">
+            This is a preference desk and a story — not a shop, not a broker, and not a place that takes your card.
+            You send a SEPA transfer to a dedicated account, and you say how you would like that gift allocated
+            across a few simple sleeves. Parents hold the account as custodians and invest later, in their own time.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#allocate">Choose an allocation</a>
+            <a class="btn btn-secondary" href="#give">See how to give</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why" aria-labelledby="why-title">
+        <div class="wrap prose">
+          <h2 id="why-title">Why capital from the beginning</h2>
+          <p>
+            A life is long. Money given early — even a modest amount — can sit and compound while a little one
+            learns to walk, to read, to choose a path. This page exists so people who love that child can
+            contribute to a dedicated pot, without turning a birth into a catalogue or a payment form.
+          </p>
+          <p>
+            The child is not named here on purpose. The branding stays generic:
+            <strong>gift capital for a little one</strong>. The account is held by parents who are German tax
+            residents, as custodians. Your allocation is a wish they can see and honour — not an order, and not
+            a purchase of securities through this site.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <h2 id="how-title">How a gift works</h2>
+          <div class="grid-3">
+            <article class="card">
+              <span class="step-num">Step 1</span>
+              <h3>Choose a mix</h3>
+              <p>Pick a preset or set your own percentages across four sleeves. They must add up to 100%.</p>
+            </article>
+            <article class="card">
+              <span class="step-num">Step 2</span>
+              <h3>Copy the reference</h3>
+              <p>
+                The site writes your wish into a short transfer code. Nothing is sent to a server — it stays in
+                your browser and in the bank reference.
+              </p>
+            </article>
+            <article class="card">
+              <span class="step-num">Step 3</span>
+              <h3>Transfer from your bank</h3>
+              <p>
+                Use your own bank’s SEPA transfer to the dedicated IBAN. This website never processes a payment.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sleeves" aria-labelledby="sleeves-title">
+        <div class="wrap">
+          <h2 id="sleeves-title">The four sleeves</h2>
+          <p class="lede">Parents execute investments later. These labels are a shared language for your preference.</p>
+          <div class="grid-2">
+            <article class="card sleeve-card">
+              <p class="meta">Higher long-run risk</p>
+              <h3>Global growth</h3>
+              <p>A broad world equity ETF sleeve — the long path, with more weather along the way.</p>
+            </article>
+            <article class="card sleeve-card">
+              <p class="meta">Equity and bonds together</p>
+              <h3>Balanced</h3>
+              <p>A mix of equities and bonds, for people who want growth with a quieter middle.</p>
+            </article>
+            <article class="card sleeve-card">
+              <p class="meta">Calmer path</p>
+              <h3>Steady</h3>
+              <p>Bonds and cash-oriented holdings. Less drama, less long-run growth in ordinary years.</p>
+            </article>
+            <article class="card sleeve-card">
+              <p class="meta">Leave the mix</p>
+              <h3>Parents decide</h3>
+              <p>You give the capital and leave the allocation to the custodians. That is a complete choice.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="allocate" aria-labelledby="allocate-title">
+        <div class="wrap">
+          <h2 id="allocate-title">Your allocation</h2>
+          <p class="lede">
+            Presets first; custom if you prefer. The live mix and the transfer reference update as you go.
+            Your last draft is remembered in this browser.
+          </p>
+
+          <div class="card panel">
+            <p class="kicker">Presets</p>
+            <div class="presets" role="group" aria-label="Allocation presets">
+              <button type="button" class="chip" data-preset="growth">All global growth</button>
+              <button type="button" class="chip" data-preset="mostly">Mostly growth</button>
+              <button type="button" class="chip" data-preset="balanced">All balanced</button>
+              <button type="button" class="chip" data-preset="steady">All steady</button>
+              <button type="button" class="chip" data-preset="parents">Parents decide</button>
+              <button type="button" class="chip" data-preset="custom">Custom</button>
+            </div>
+
+            <div class="mix" id="live-mix" aria-hidden="true"></div>
+            <p class="sr-only" data-summary></p>
+
+            <div class="sleeve-row">
+              <label for="pct-growth">Global growth</label>
+              <div class="pct">
+                <input id="pct-growth" data-sleeve="growth" type="number" min="0" max="100" step="1" value="70" inputmode="numeric" />
+                <span aria-hidden="true">%</span>
+              </div>
+              <p class="hint">Broad world equity ETF sleeve.</p>
+              <label class="sr-only" for="range-growth">Global growth slider</label>
+              <input id="range-growth" data-sleeve="growth" type="range" min="0" max="100" step="1" value="70" />
+            </div>
+
+            <div class="sleeve-row">
+              <label for="pct-balanced">Balanced</label>
+              <div class="pct">
+                <input id="pct-balanced" data-sleeve="balanced" type="number" min="0" max="100" step="1" value="20" inputmode="numeric" />
+                <span aria-hidden="true">%</span>
+              </div>
+              <p class="hint">Mix of equities and bonds.</p>
+              <label class="sr-only" for="range-balanced">Balanced slider</label>
+              <input id="range-balanced" data-sleeve="balanced" type="range" min="0" max="100" step="1" value="20" />
+            </div>
+
+            <div class="sleeve-row">
+              <label for="pct-steady">Steady</label>
+              <div class="pct">
+                <input id="pct-steady" data-sleeve="steady" type="number" min="0" max="100" step="1" value="10" inputmode="numeric" />
+                <span aria-hidden="true">%</span>
+              </div>
+              <p class="hint">Bonds and cash-oriented.</p>
+              <label class="sr-only" for="range-steady">Steady slider</label>
+              <input id="range-steady" data-sleeve="steady" type="range" min="0" max="100" step="1" value="10" />
+            </div>
+
+            <div class="sleeve-row">
+              <label for="pct-parents">Parents decide</label>
+              <div class="pct">
+                <input id="pct-parents" data-sleeve="parents" type="number" min="0" max="100" step="1" value="0" inputmode="numeric" />
+                <span aria-hidden="true">%</span>
+              </div>
+              <p class="hint">Leave the allocation to the custodians.</p>
+              <label class="sr-only" for="range-parents">Parents decide slider</label>
+              <input id="range-parents" data-sleeve="parents" type="range" min="0" max="100" step="1" value="0" />
+            </div>
+
+            <div class="total-bar" data-total-bar data-ok="true">
+              <span>Total</span>
+              <span><span data-total>100</span>%</span>
+            </div>
+            <p class="note" data-total-hint aria-live="polite">Ready — the mix adds up to 100%.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="give" aria-labelledby="give-title">
+        <div class="wrap">
+          <h2 id="give-title">How to give</h2>
+          <p class="lede">
+            Open your own bank app. Send a SEPA credit transfer. Paste the preference code as the
+            reference (<span lang="de">Verwendungszweck</span>) so parents can match the gift in their ledger.
+          </p>
+
+          <div class="card transfer">
+            <span class="placeholder-stamp">Placeholder — to be replaced</span>
+            <p class="warn">
+              <strong>Not a live account</strong>
+              <span data-holder>TO BE REPLACED — account holder</span>. IBAN and BIC below are fake German-format
+              placeholders. Do not send money until the family publishes a real dedicated IBAN.
+            </p>
+
+            <dl>
+              <div class="field">
+                <dt>Recipient / Empfänger</dt>
+                <dd>
+                  <span data-holder>TO BE REPLACED — account holder</span>
+                  <button type="button" class="copy-btn" data-copy="holder">Copy</button>
+                </dd>
+              </div>
+              <div class="field">
+                <dt>IBAN</dt>
+                <dd>
+                  <span data-iban>DE00 0000 0000 0000 0000 00</span>
+                  <button type="button" class="copy-btn" data-copy="iban">Copy</button>
+                </dd>
+              </div>
+              <div class="field">
+                <dt>BIC</dt>
+                <dd>
+                  <span data-bic>XXXXXXXXXXX</span>
+                  <button type="button" class="copy-btn" data-copy="bic">Copy</button>
+                </dd>
+              </div>
+              <div class="field">
+                <dt>Bank</dt>
+                <dd><span data-bank>TO BE REPLACED — bank name</span></dd>
+              </div>
+              <div class="field">
+                <dt>Reference / Verwendungszweck</dt>
+                <dd>
+                  <span class="code-block" data-reference aria-live="polite">GC1-070-020-010-000-XXXX</span>
+                  <button type="button" class="copy-btn" data-copy="reference">Copy</button>
+                </dd>
+              </div>
+            </dl>
+
+            <p class="note" data-when-ready>
+              This code is your allocation, written for a bank statement. Keep it exactly as shown.
+            </p>
+            <p class="warn" data-needs-100 hidden>
+              The reference appears when the four sleeves add up to 100%.
+            </p>
+
+            <div class="actions" style="margin-top: 1.1rem">
+              <button type="button" class="btn" data-copy="slip">Copy all transfer details</button>
+              <button type="button" class="btn btn-secondary" data-new-draft>New preference code</button>
+            </div>
+            <p class="note">
+              Format: <code>GC1-GGG-BBB-SSS-PPP-TTTT</code> — global, balanced, steady, parents (percentages),
+              then a short token. Example: <code>GC1-070-020-010-000-K7MM</code> means 70% growth, 20% balanced,
+              10% steady. Parents match this to the incoming transfer in
+              <a href="ledger.html">the ledger helper</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <a class="wordmark" href="index.html">Gift capital</a>
+        <nav class="nav-links" aria-label="Footer">
+          <a href="privacy.html">Privacy</a>
+          <a href="ledger.html">Parent ledger</a>
+        </nav>
+      </div>
+      <div class="wrap legal">
+        <p>
+          This site does not give investment advice and does not buy or sell securities. It does not process
+          payments, cards, or wallets. Parents remain the custodians; allocation codes are preferences, not
+          instructions to a broker.
+        </p>
+        <p lang="de">
+          Keine Anlageberatung. Kein Wertpapierkauf über diese Seite. Keine Zahlungsabwicklung.
+        </p>
+        <p>
+          No child is named here. Drafts stay in your browser’s local storage. Read the
+          <a href="privacy.html">privacy note</a>.
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/reference.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

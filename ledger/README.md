@@ -2,9 +2,11 @@
 
 This folder is a **paper trail for custodians**, not software that talks to a bank.
 
-Friends and family send a SEPA transfer to the dedicated child IBAN and put a preference code in the transfer reference (`Verwendungszweck`). You match that incoming payment to a row here, then invest later in your own custody process.
+When the dedicated Juniorkonto exists, friends and family send a SEPA transfer and put a preference code in the transfer reference (`Verwendungszweck`). You match that incoming payment to a row here, then invest later in your own custody process.
 
-The public website never sees the money and never places a trade.
+Until that account is open: **do not transfer yet / Konto folgt.** The public site must not show a fake IBAN.
+
+The public website never sees the money, never places a trade, and is not a brokerage.
 
 ## Preference code (`GC1`)
 
@@ -17,7 +19,7 @@ GC1-070-020-010-000-K7MM
 | Part | Meaning |
 | --- | --- |
 | `GC1` | Format version |
-| `070` | Global growth % |
+| `070` | Growth % |
 | `020` | Balanced % |
 | `010` | Steady % |
 | `000` | Parents decide % |
@@ -48,15 +50,14 @@ Suggested `status` values: `unmatched`, `matched`, `invested`, `thanked`.
 - [`gifts.template.csv`](gifts.template.csv) — spreadsheet-friendly
 - [`gifts.template.json`](gifts.template.json) — same fields as structured data
 
-Copy them out of git (for example `gifts.csv` on a private drive) before filling in live gifts.
+Copy them out of git (for example `gifts.csv` on a private drive) before filling in live gifts. Sample rows use no account numbers.
 
-## Swapping the live IBAN later
+## Publishing the live IBAN later
 
-The site reads account fields from [`js/config.js`](../js/config.js). When the dedicated account exists:
+The site reads account fields from [`js/config.js`](../js/config.js). When the dedicated Juniorkonto exists:
 
-1. Replace `ibanDisplay`, `ibanCompact`, `bic`, `accountHolder`, and `bankName`.
-2. Set `placeholder` to `false` and shorten `placeholderNotice`.
-3. Update the sample `account` block in `gifts.template.json` if you still want the template to match.
-4. Publish the change (push to `main` so GitHub Pages updates).
+1. Set the real `ibanDisplay`, `ibanCompact`, `bic`, `accountHolder`, and `bankName`.
+2. Set `accountReady` to `true`.
+3. Publish the change (push to `main` so GitHub Pages updates).
 
-Until then, the IBAN `DE00 0000 0000 0000 0000 00` is a **placeholder in German IBAN shape**. Check digits `00` are intentional. It is not a real account. Do not ask anyone to transfer to it.
+Until then, leave those strings empty. Do not invent a DE-looking placeholder.

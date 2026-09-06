@@ -29,7 +29,7 @@
       "</p>" +
       '<div class="mix" id="decoded-mix" aria-hidden="true"></div>' +
       '<div class="table-wrap"><table><thead><tr><th>Sleeve</th><th>%</th></tr></thead><tbody>' +
-      row("Global growth", a.growth) +
+      row("Growth", a.growth) +
       row("Balanced", a.balanced) +
       row("Steady", a.steady) +
       row("Parents decide", a.parents) +

@@ -1,21 +1,26 @@
 /**
- * Transfer details — swap these when the dedicated child IBAN is ready.
+ * Transfer details — leave accountReady false until a real Juniorkonto exists.
  *
- * All values below are PLACEHOLDERS. They are not a real account.
- * See README.md → “How to swap the real IBAN later”.
+ * Never publish a fake DE-looking IBAN or BIC. An invented number can be
+ * mistyped as a live account. Until the dedicated account is open, the
+ * how-to page stays on “Do not transfer yet / Konto folgt”.
+ *
+ * When the real account exists, fill the fields below and set accountReady
+ * to true. See README.md → “How to publish the real IBAN later”.
  */
 window.GIFT_CAPITAL = Object.freeze({
   version: "GC1",
   siteName: "Gift capital",
-  /** Display IBAN (grouped). Fake DE format. Check digits 00 — not a live account. */
-  ibanDisplay: "DE00 0000 0000 0000 0000 00",
-  ibanCompact: "DE00000000000000000000",
-  /** 11-character BIC placeholder */
-  bic: "XXXXXXXXXXX",
-  accountHolder: "TO BE REPLACED — account holder",
-  bankName: "TO BE REPLACED — bank name",
+  /** Must stay false until ibanDisplay / bic are a real Juniorkonto. */
+  accountReady: false,
+  ibanDisplay: "",
+  ibanCompact: "",
+  bic: "",
+  accountHolder: "",
+  bankName: "",
   currency: "EUR",
-  placeholder: true,
-  placeholderNotice:
-    "PLACEHOLDER — TO BE REPLACED. This is not a real account. Do not send money until the family shares a live IBAN.",
+  waitTitle: "Do not transfer yet",
+  waitTitleDe: "Konto folgt",
+  waitNotice:
+    "The dedicated Juniorkonto is not open yet. No IBAN or BIC is published here. Please do not transfer money.",
 });

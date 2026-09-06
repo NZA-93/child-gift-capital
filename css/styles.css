@@ -461,6 +461,12 @@ a:hover {
   font-size: 0.78rem;
 }
 
+.wish-note {
+  margin: 0.85rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
 .transfer {
   position: relative;
 }
@@ -477,6 +483,16 @@ a:hover {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.field.is-disabled dd {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-style: italic;
+}
+
+.field.is-disabled .muted-value {
+  opacity: 0.85;
 }
 
 .field {

@@ -467,6 +467,20 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.faq-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.15rem 0 0;
+}
+
+.faq-item h3 {
+  margin: 0 0 0.45rem;
+}
+
+.faq-item p {
+  margin: 0;
+}
+
 .transfer {
   position: relative;
 }

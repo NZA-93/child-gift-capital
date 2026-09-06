@@ -107,6 +107,27 @@
     );
   }
 
+  /** In-page section ids — do not overwrite these with a preference code. */
+  var SECTION_HASHES = {
+    main: true,
+    why: true,
+    how: true,
+    sleeves: true,
+    allocate: true,
+    give: true,
+    faq: true,
+  };
+
+  function hashId() {
+    return (location.hash || "").replace(/^#/, "");
+  }
+
+  function shouldWriteCodeHash(current) {
+    if (!current) return true;
+    if (SECTION_HASHES[current]) return false;
+    return Ref.decode(current).ok;
+  }
+
   function fillAccountFields() {
     var live = accountIsLive();
     $all("[data-waiting-block]").forEach(function (el) {
@@ -208,7 +229,7 @@
       $all("[data-summary]").forEach(function (el) {
         el.textContent = Ref.summarize(result.alloc);
       });
-      if (history.replaceState) {
+      if (history.replaceState && shouldWriteCodeHash(hashId())) {
         history.replaceState(null, "", "#" + result.code);
       }
     } else {

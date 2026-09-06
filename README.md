@@ -74,7 +74,7 @@ Then open `http://127.0.0.1:8080/`.
 
 | Path | Role |
 | --- | --- |
-| `index.html` | Landing, allocation UI, how to give |
+| `index.html` | Landing, allocation UI, how to give, FAQ |
 | `privacy.html` | Privacy + “not advice / not a brokerage” |
 | `ledger.html` | Decode a bank reference |
 | `js/config.js` | Account gate (`accountReady`) — empty until the Juniorkonto exists |

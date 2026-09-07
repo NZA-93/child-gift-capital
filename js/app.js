@@ -214,22 +214,14 @@
     var summary = $("[data-horizon-summary]");
     if (!ready || !empty) return;
 
-    var alloc = currentAlloc();
-    var ok = Ref.validateAlloc(alloc) === "";
     var hasMoney = state.lump > 0 || state.monthly > 0;
 
-    $all('[data-horizon]').forEach(function (input) {
+    $all("[data-horizon]").forEach(function (input) {
       var key = input.getAttribute("data-horizon");
       if (document.activeElement === input) return;
       input.value = state[key];
     });
 
-    if (!ok) {
-      ready.hidden = true;
-      empty.hidden = false;
-      empty.textContent = "The illustration appears when the four sleeves add up to 100%.";
-      return;
-    }
     if (!hasMoney) {
       ready.hidden = true;
       empty.hidden = false;
@@ -241,44 +233,41 @@
       age: state.age,
       lump: state.lump,
       monthly: state.monthly,
-      alloc: alloc,
     });
-    var end = Proj.lastPoint(model);
-    var endMix = Proj.formatEur(end.total);
-    var endGrowth = Proj.formatEur(model.comparison.growth[model.comparison.growth.length - 1]);
-    var endBalanced = Proj.formatEur(model.comparison.balanced[model.comparison.balanced.length - 1]);
-    var endSteady = Proj.formatEur(model.comparison.steady[model.comparison.steady.length - 1]);
+    var end = Proj.lastValues(model);
+    var endGrowth = Proj.formatEur(end.growth);
+    var endBalanced = Proj.formatEur(end.balanced);
+    var endSteady = Proj.formatEur(end.steady);
+    var yearLabel = model.years === 1 ? "1 year" : model.years + " years";
 
     ready.hidden = false;
     empty.hidden = true;
     if (chart) chart.innerHTML = Proj.renderChart(model);
     if (readout) {
       readout.innerHTML =
-        '<div class="horizon-stat is-mix"><span class="label">Your mix at 18</span><span class="value">' +
-        endMix +
-        '</span></div><div class="horizon-stat"><span class="label">All Growth example</span><span class="value">' +
+        '<div class="horizon-stat"><span class="label">Growth 6%</span><span class="value">' +
         endGrowth +
-        '</span></div><div class="horizon-stat"><span class="label">All Balanced example</span><span class="value">' +
+        '</span></div><div class="horizon-stat"><span class="label">Balanced 4%</span><span class="value">' +
         endBalanced +
-        '</span></div><div class="horizon-stat"><span class="label">All Steady example</span><span class="value">' +
+        '</span></div><div class="horizon-stat"><span class="label">Steady 2%</span><span class="value">' +
         endSteady +
-        "</span></div>";
+        '</span></div><p class="horizon-muted"><span class="swatch is-muted" aria-hidden="true"></span> Parents decide is not plotted — they choose later, so there is no invented path.</p>';
     }
     if (summary) {
       summary.textContent =
         model.years === 0
-          ? "She is already 18 in this illustration. Illustrated capital: " + endMix + "."
-          : "Illustrated capital at her 18th birthday, from age " +
-            model.age +
-            ": " +
-            endMix +
-            ". Example all-Growth " +
+          ? "She is already 18 in this illustration. Starting gift " +
+            Proj.formatEur(model.lump) +
+            " is unchanged. Parents decide is not plotted."
+          : "Illustration in nominal euros over " +
+            yearLabel +
+            " until she turns 18: Growth " +
             endGrowth +
-            ", all-Balanced " +
+            ", Balanced " +
             endBalanced +
-            ", all-Steady " +
+            ", Steady " +
             endSteady +
-            ".";
+            ". Not a promise, forecast, or advice, and not her real account. Parents decide is not plotted.";
     }
     saveHorizon();
   }

@@ -31,25 +31,25 @@ These are wishes parents may follow — not a trade order, and not investment ad
 
 ## Illustrative projection (to her 18th birthday)
 
-The public page includes a **picture of potential growth** from a starting gift and optional monthly gifts until age 18. It follows the current sleeve mix. It is **not** a forecast, **not** investment advice, and **not** a promise of what she will have.
+The public page includes a gentle picture: **If a gift could grow until her 18th birthday.** It is **not** a promise, forecast, or advice, **not** her real account path, and **not** a Schenkung outcome.
 
-Example yearly rates used only for that picture:
+Constant annual returns used only for that picture (nominal euros):
 
-| Sleeve | Example annual return | What it is for |
+| Series | Example annual return | Plotted? |
 | --- | --- | --- |
-| Growth | 7% | A round, long-horizon equity-like number for the sketch |
-| Balanced | 4.5% | A round, mixed stocks-and-bonds-like number |
-| Steady | 2% | A round, cash/bonds-like number |
-| Parents decide | 4.5% | Drawn at the Balanced example rate, so the sleeve is visible |
+| Growth | 6% | Yes |
+| Balanced | 4% | Yes |
+| Steady | 2% | Yes |
+| Parents decide | — | **No** — greyed in the legend; no invented path |
 
 How the sketch is built:
 
-1. Today (her current age) the starting gift is split by the mix.
-2. Each later birthday, twelve monthly gifts (if any) are added in the same mix, then each sleeve is grown by its example rate. Compounding is **once a year**.
-3. The stacked areas are the sleeves; the dark line is their total. Cards underneath compare the mix with “all Growth / all Balanced / all Steady” using the same gifts and the same example rates.
-4. No fees, tax, inflation, or market path. Real results will differ — including losses.
+1. Default one-off gift **€500** (nudgeable). Horizon is **years until she turns 18** (her age now is an input).
+2. Each series is `amount × (1 + r)^t`. Optional monthly gifts, if typed, are treated as twelve amounts added on each birthday, then grown. Compounding is **once a year**.
+3. Three lines only: Growth / Balanced / Steady. Parents decide is listed as muted and is **not** plotted at the Balanced rate or any other rate.
+4. No fees and no tax in the picture. Markets go up and down; this is not a promise, forecast, or advice.
 
-The allocation bar (live mix) shows the four sleeve percentages with a colour legend so the mix is readable on a phone.
+The allocation bar (live mix) still shows the four sleeve percentages with a colour legend so the mix is readable on a phone. That mix is a wish, not the chart.
 
 ## Preference code
 

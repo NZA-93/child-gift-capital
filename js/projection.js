@@ -1,29 +1,37 @@
 /**
- * Illustrative capital projection to an 18th birthday.
+ * Illustrative capital picture to an 18th birthday.
  *
- * These yearly rates are examples for a picture on the page — not forecasts,
+ * Constant annual returns for a picture on the page — not forecasts,
  * not advice, and not a promise. See README.md → “Illustrative projection”.
+ *
+ * Series plotted: Growth 6% · Balanced 4% · Steady 2%.
+ * Parents decide is never plotted (no invented path).
  */
 (function (root) {
   var HORIZON_AGE = 18;
 
   /** Example annual returns used only for the illustration. */
   var EXAMPLE_RATES = {
-    growth: 0.07,
-    balanced: 0.045,
+    growth: 0.06,
+    balanced: 0.04,
     steady: 0.02,
-    /** Parents-decide is drawn at the Balanced example rate. */
-    parents: 0.045,
   };
 
   var EXAMPLE_RATE_LABELS = {
-    growth: "7%",
-    balanced: "4.5%",
+    growth: "6%",
+    balanced: "4%",
     steady: "2%",
-    parents: "4.5%",
   };
 
-  var SLEEVES = [
+  /** Chart series only — Parents decide is omitted on purpose. */
+  var SERIES = [
+    { key: "growth", cls: "g", label: "Growth" },
+    { key: "balanced", cls: "b", label: "Balanced" },
+    { key: "steady", cls: "s", label: "Steady" },
+  ];
+
+  /** Allocation bar still lists all four wish sleeves. */
+  var MIX_SLEEVES = [
     { key: "growth", cls: "g", label: "Growth" },
     { key: "balanced", cls: "b", label: "Balanced" },
     { key: "steady", cls: "s", label: "Steady" },
@@ -59,78 +67,57 @@
     return "€" + Math.round(n);
   }
 
-  function sleeveRate(key) {
-    return EXAMPLE_RATES[key] || 0;
+  function futureValue(principal, rate, years) {
+    return principal * Math.pow(1 + rate, years);
   }
 
   /**
    * Compound once a year:
-   *   now (current age) = starting gift, split by the mix
-   *   each later birthday = previous × (1 + sleeve rate) + 12 × monthly × sleeve share
+   *   year 0 = starting gift
+   *   each later year = previous × (1 + rate) + 12 × monthly
    *
    * Recurring gifts are treated as a year of monthly gifts, credited on the birthday.
+   * When monthly is 0 this matches FV = amount × (1 + r)^t.
    */
+  function pathAll(lump, monthly, rate, years) {
+    var annualGift = monthly * 12;
+    var values = [lump];
+    var v = lump;
+    var y;
+    for (y = 0; y < years; y++) {
+      v = v * (1 + rate) + annualGift;
+      values.push(v);
+    }
+    return values;
+  }
+
   function project(input) {
-    var alloc = input.alloc || {};
     var age = clamp(Math.round(Number(input.age)), 0, HORIZON_AGE);
     var lump = clamp(Number(input.lump), 0, 1000000);
     var monthly = clamp(Number(input.monthly), 0, 20000);
     var years = HORIZON_AGE - age;
-    var annualGift = monthly * 12;
-
-    function seed() {
-      var out = { age: age, total: 0 };
-      SLEEVES.forEach(function (s) {
-        var share = (Number(alloc[s.key]) || 0) / 100;
-        out[s.key] = lump * share;
-        out.total += out[s.key];
-      });
-      return out;
-    }
-
-    function step(prev) {
-      var next = { age: prev.age + 1, total: 0 };
-      SLEEVES.forEach(function (s) {
-        var share = (Number(alloc[s.key]) || 0) / 100;
-        var grown = prev[s.key] * (1 + sleeveRate(s.key)) + annualGift * share;
-        next[s.key] = grown;
-        next.total += grown;
-      });
-      return next;
-    }
-
-    var points = [seed()];
-    for (var i = 0; i < years; i++) {
-      points.push(step(points[points.length - 1]));
-    }
-
-    function pathAll(rate) {
-      var values = [lump];
-      var v = lump;
-      for (var y = 0; y < years; y++) {
-        v = v * (1 + rate) + annualGift;
-        values.push(v);
-      }
-      return values;
-    }
-
+    var series = {};
+    SERIES.forEach(function (s) {
+      series[s.key] = pathAll(lump, monthly, EXAMPLE_RATES[s.key], years);
+    });
     return {
       age: age,
       years: years,
       lump: lump,
       monthly: monthly,
-      annualGift: annualGift,
-      points: points,
-      comparison: {
-        growth: pathAll(EXAMPLE_RATES.growth),
-        balanced: pathAll(EXAMPLE_RATES.balanced),
-        steady: pathAll(EXAMPLE_RATES.steady),
-      },
+      annualGift: monthly * 12,
+      series: series,
     };
   }
 
-  function lastPoint(model) {
-    return model.points[model.points.length - 1];
+  function lastValues(model) {
+    var i = model.years;
+    return {
+      years: i,
+      growth: model.series.growth[i],
+      balanced: model.series.balanced[i],
+      steady: model.series.steady[i],
+    };
   }
 
   function svgEl(name, attrs, children) {
@@ -144,11 +131,12 @@
     return open + children + "</" + name + ">";
   }
 
-  function areaPath(xs, tops, bottoms) {
+  function areaPath(xs, ys, yBase) {
+    var d = "M" + xs[0].toFixed(1) + "," + ys[0].toFixed(1);
     var i;
-    var d = "M" + xs[0].toFixed(1) + "," + tops[0].toFixed(1);
-    for (i = 1; i < xs.length; i++) d += " L" + xs[i].toFixed(1) + "," + tops[i].toFixed(1);
-    for (i = xs.length - 1; i >= 0; i--) d += " L" + xs[i].toFixed(1) + "," + bottoms[i].toFixed(1);
+    for (i = 1; i < xs.length; i++) d += " L" + xs[i].toFixed(1) + "," + ys[i].toFixed(1);
+    d += " L" + xs[xs.length - 1].toFixed(1) + "," + yBase.toFixed(1);
+    d += " L" + xs[0].toFixed(1) + "," + yBase.toFixed(1);
     return d + " Z";
   }
 
@@ -167,28 +155,31 @@
   }
 
   function renderChart(model) {
-    var pts = model.points;
+    var years = model.years;
+    var count = years + 1;
     var w = 320;
     var h = 180;
+    var yBase = h - 4;
     var maxRaw = 0;
-    pts.forEach(function (p) {
-      if (p.total > maxRaw) maxRaw = p.total;
+    SERIES.forEach(function (s) {
+      var last = model.series[s.key][years];
+      if (last > maxRaw) maxRaw = last;
     });
     var yMax = niceMax(maxRaw * 1.12);
 
     function xAt(i) {
       var pad = 4;
-      if (pts.length === 1) return w / 2;
-      return pad + (i * (w - pad * 2)) / (pts.length - 1);
+      if (count === 1) return w / 2;
+      return pad + (i * (w - pad * 2)) / (count - 1);
     }
     function yAt(v) {
       var pad = 4;
       return pad + (h - pad * 2) * (1 - v / yMax);
     }
 
-    var xs = pts.map(function (_, i) {
-      return xAt(i);
-    });
+    var xs = [];
+    var i;
+    for (i = 0; i < count; i++) xs.push(xAt(i));
 
     var tickCount = 2;
     var yTicks = [];
@@ -206,59 +197,43 @@
       });
     }
 
-    var stacked = "";
-    var cumulative = pts.map(function () {
-      return 0;
-    });
-    SLEEVES.forEach(function (s) {
-      var bottoms = cumulative.slice();
-      var tops = pts.map(function (p, i) {
-        return bottoms[i] + p[s.key];
-      });
-      var hasWidth = tops.some(function (v, i) {
-        return v - bottoms[i] > 0.5;
-      });
-      if (hasWidth) {
-        stacked += svgEl("path", {
-          class: "sleeve-area " + s.cls,
-          d: areaPath(
-            xs,
-            tops.map(yAt),
-            bottoms.map(yAt)
-          ),
+    var areas = "";
+    var lines = "";
+    var dots = "";
+    SERIES.slice()
+      .reverse()
+      .forEach(function (s) {
+        var ys = model.series[s.key].map(yAt);
+        areas += svgEl("path", {
+          class: "series-area " + s.cls,
+          d: areaPath(xs, ys, yBase),
         });
-      }
-      cumulative = tops;
-    });
-
-    var totalLine = svgEl("path", {
-      class: "total-line",
-      d: linePath(
-        xs,
-        pts.map(function (p) {
-          return yAt(p.total);
-        })
-      ),
-      fill: "none",
-    });
-
-    var end = lastPoint(model);
-    var endDot = svgEl("circle", {
-      class: "end-dot",
-      cx: xs[xs.length - 1].toFixed(1),
-      cy: yAt(end.total).toFixed(1),
-      r: 5,
+      });
+    SERIES.forEach(function (s) {
+      var ys = model.series[s.key].map(yAt);
+      var end = model.series[s.key][years];
+      lines += svgEl("path", {
+        class: "series-line " + s.cls,
+        d: linePath(xs, ys),
+        fill: "none",
+      });
+      dots += svgEl("circle", {
+        class: "end-dot " + s.cls,
+        cx: xs[xs.length - 1].toFixed(1),
+        cy: yAt(end).toFixed(1),
+        r: 4.5,
+      });
     });
 
     var xIdx = [0];
-    if (pts.length > 2) xIdx.push(Math.round((pts.length - 1) / 2));
-    if (pts.length > 1) xIdx.push(pts.length - 1);
+    if (count > 2) xIdx.push(Math.round((count - 1) / 2));
+    if (count > 1) xIdx.push(count - 1);
     var seen = {};
     var xLabels = [];
-    xIdx.forEach(function (i) {
-      if (seen[i]) return;
-      seen[i] = true;
-      xLabels.push("Age " + pts[i].age);
+    xIdx.forEach(function (idx) {
+      if (seen[idx]) return;
+      seen[idx] = true;
+      xLabels.push(String(idx));
     });
 
     var yHtml = yTicks
@@ -266,9 +241,11 @@
         return "<span>" + formatAxis(v) + "</span>";
       })
       .join("");
-    var xHtml = xLabels.map(function (label) {
-      return "<span>" + label + "</span>";
-    }).join("");
+    var xHtml = xLabels
+      .map(function (label) {
+        return "<span>" + label + "</span>";
+      })
+      .join("");
 
     var svg =
       '<svg class="horizon-svg" viewBox="0 0 ' +
@@ -277,13 +254,14 @@
       h +
       '" preserveAspectRatio="none" role="img" aria-hidden="true" focusable="false">' +
       grid +
-      stacked +
-      totalLine +
-      endDot +
+      areas +
+      lines +
+      dots +
       "</svg>";
 
     return (
       '<div class="horizon-plot">' +
+      '<p class="horizon-ytitle">illustrative euro value · nominal</p>' +
       '<div class="horizon-ylabels" aria-hidden="true">' +
       yHtml +
       "</div>" +
@@ -293,12 +271,13 @@
       '<div class="horizon-xlabels" aria-hidden="true">' +
       xHtml +
       "</div>" +
+      '<p class="horizon-xtitle">years until she turns 18</p>' +
       "</div>"
     );
   }
 
   function renderMix(barEl, legendEl, alloc) {
-    var html = SLEEVES.map(function (s) {
+    var html = MIX_SLEEVES.map(function (s) {
       var n = Number(alloc[s.key]) || 0;
       return (
         '<span class="' +
@@ -314,7 +293,7 @@
         '%"></span>'
       );
     }).join("");
-    var total = SLEEVES.reduce(function (sum, s) {
+    var total = MIX_SLEEVES.reduce(function (sum, s) {
       return sum + (Number(alloc[s.key]) || 0);
     }, 0);
     var rest = Math.max(0, 100 - total);
@@ -328,7 +307,7 @@
     }
     if (barEl) barEl.innerHTML = html;
     if (legendEl) {
-      legendEl.innerHTML = SLEEVES.map(function (s) {
+      legendEl.innerHTML = MIX_SLEEVES.map(function (s) {
         var n = Number(alloc[s.key]) || 0;
         return (
           '<li class="' +
@@ -349,12 +328,16 @@
     HORIZON_AGE: HORIZON_AGE,
     EXAMPLE_RATES: EXAMPLE_RATES,
     EXAMPLE_RATE_LABELS: EXAMPLE_RATE_LABELS,
-    SLEEVES: SLEEVES,
+    SERIES: SERIES,
+    MIX_SLEEVES: MIX_SLEEVES,
     project: project,
-    lastPoint: lastPoint,
+    lastValues: lastValues,
+    lastPoint: lastValues,
     renderChart: renderChart,
     renderMix: renderMix,
     formatEur: formatEur,
+    futureValue: futureValue,
+    pathAll: pathAll,
     clamp: clamp,
   };
 

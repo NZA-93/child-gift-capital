@@ -6,9 +6,9 @@
     <title>Gift capital — a preference desk for long-horizon gifts</title>
     <meta
       name="description"
-      content="A quiet way for family and friends to gift money toward a little one’s long-horizon capital, and to say how they would like that gift looked after. Not a broker. Not a payment processor."
+      content="A quiet way for family and friends to gift money toward a little girl’s long-horizon capital, and to say how they would like that gift looked after. Not a broker. Not a payment processor."
     />
-    <meta name="theme-color" content="#ebe4d4" />
+    <meta name="theme-color" content="#f4e8e2" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -18,15 +18,16 @@
       <div class="wrap">
         <a class="wordmark" href="index.html">
           <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
-            <rect width="64" height="64" rx="14" fill="#3d5c45" />
-            <path d="M32 48c0-10 4-16 10-20" fill="none" stroke="#f4efe4" stroke-width="3.2" stroke-linecap="round" />
-            <path d="M32 48c0-11-5-18-12-22" fill="none" stroke="#d7c4a3" stroke-width="3.2" stroke-linecap="round" />
-            <circle cx="32" cy="18" r="4.2" fill="#f4efe4" />
+            <rect width="64" height="64" rx="14" fill="#9a4f5c" />
+            <path d="M32 48c0-10 4-16 10-20" fill="none" stroke="#faf6f1" stroke-width="3.2" stroke-linecap="round" />
+            <path d="M32 48c0-11-5-18-12-22" fill="none" stroke="#e8c4c0" stroke-width="3.2" stroke-linecap="round" />
+            <circle cx="32" cy="18" r="4.2" fill="#faf6f1" />
           </svg>
           Gift capital
         </a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#allocate">Allocate</a>
+          <a href="#horizon">Until 18</a>
           <a href="#give">How to give</a>
           <a href="#faq">FAQ</a>
           <a href="privacy.html">Privacy</a>
@@ -38,7 +39,7 @@
       <section class="hero">
         <div class="wrap">
           <p class="kicker">For family and friends</p>
-          <h1>A gift that can grow quietly from the start.</h1>
+          <h1>A gift that can grow quietly with her, from the start.</h1>
           <p class="lede">
             This is a preference desk and a story — not a shop, not a broker, and not a place that takes your card.
             You say how you would like a gift allocated across a few simple sleeves. Parents, as custodians, look
@@ -46,22 +47,22 @@
           </p>
           <div class="actions">
             <a class="btn" href="#allocate">Choose an allocation</a>
-            <a class="btn btn-secondary" href="#give">See how to give</a>
+            <a class="btn btn-secondary" href="#horizon">See growth to 18</a>
           </div>
         </div>
       </section>
 
       <section class="section" id="why" aria-labelledby="why-title">
         <div class="wrap prose">
-          <h2 id="why-title">Why capital from the beginning</h2>
+          <h2 id="why-title">Why capital for her, from the beginning</h2>
           <p>
-            A life is long. Money given early — even a modest amount — can sit and compound while a little one
-            learns to walk, to read, to choose a path. This page exists so people who love that child can
-            contribute to a dedicated pot, without turning a birth into a catalogue or a payment form.
+            A life is long. Money given early — even a modest amount — can sit and compound while she learns
+            to walk, to read, to choose a path. This page exists so people who love her can contribute to a
+            dedicated pot, without turning a birth into a catalogue or a payment form.
           </p>
           <p>
-            The child is not named here on purpose. The branding stays generic:
-            <strong>gift capital for a little one</strong>. Parents hold any future account as custodians.
+            She is not named here on purpose. The branding stays generic:
+            <strong>gift capital for a little girl</strong>. Parents hold any future account as custodians.
             Your allocation is a wish they may follow — not an order, and not a way to buy a sleeve or any
             security through this site.
           </p>
@@ -100,7 +101,10 @@
       <section class="section" id="sleeves" aria-labelledby="sleeves-title">
         <div class="wrap">
           <h2 id="sleeves-title">The four sleeves</h2>
-          <p class="lede">Parents, as custodians, invest later. These labels are a shared language for your wish — not something you buy here.</p>
+          <p class="lede">
+            Parents, as custodians, invest later — for her. These labels are a shared language for your wish —
+            not something you buy here.
+          </p>
           <div class="grid-2">
             <article class="card sleeve-card">
               <h3>Growth</h3>
@@ -141,11 +145,15 @@
               <button type="button" class="chip" data-preset="custom">Custom</button>
             </div>
 
-            <div class="mix" id="live-mix" aria-hidden="true"></div>
-            <p class="sr-only" data-summary></p>
+            <div class="mix-visual">
+              <p class="kicker" id="mix-legend-label">Live mix</p>
+              <div class="mix" id="live-mix" role="img" aria-labelledby="mix-legend-label mix-summary"></div>
+              <ul class="mix-legend" id="live-mix-legend"></ul>
+              <p class="sr-only" id="mix-summary" data-summary></p>
+            </div>
 
             <div class="sleeve-row">
-              <label for="pct-growth">Growth</label>
+              <label for="pct-growth"><span class="swatch g" aria-hidden="true"></span> Growth</label>
               <div class="pct">
                 <input id="pct-growth" data-sleeve="growth" type="number" min="0" max="100" step="1" value="70" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
@@ -156,7 +164,7 @@
             </div>
 
             <div class="sleeve-row">
-              <label for="pct-balanced">Balanced</label>
+              <label for="pct-balanced"><span class="swatch b" aria-hidden="true"></span> Balanced</label>
               <div class="pct">
                 <input id="pct-balanced" data-sleeve="balanced" type="number" min="0" max="100" step="1" value="20" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
@@ -167,7 +175,7 @@
             </div>
 
             <div class="sleeve-row">
-              <label for="pct-steady">Steady</label>
+              <label for="pct-steady"><span class="swatch s" aria-hidden="true"></span> Steady</label>
               <div class="pct">
                 <input id="pct-steady" data-sleeve="steady" type="number" min="0" max="100" step="1" value="10" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
@@ -178,7 +186,7 @@
             </div>
 
             <div class="sleeve-row">
-              <label for="pct-parents">Parents decide</label>
+              <label for="pct-parents"><span class="swatch p" aria-hidden="true"></span> Parents decide</label>
               <div class="pct">
                 <input id="pct-parents" data-sleeve="parents" type="number" min="0" max="100" step="1" value="0" inputmode="numeric" />
                 <span aria-hidden="true">%</span>
@@ -194,6 +202,54 @@
             </div>
             <p class="note" data-total-hint aria-live="polite">Ready — the mix adds up to 100%.</p>
             <p class="wish-note">These are wishes parents may follow — not a trade order, and not investment advice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="horizon" aria-labelledby="horizon-title">
+        <div class="wrap">
+          <h2 id="horizon-title">Potential growth to her 18th birthday</h2>
+          <p class="lede">
+            An illustration of how a starting gift, and optional monthly gifts, might look by the time she
+            turns 18 — using your mix and example yearly rates. It is a picture, not a forecast.
+          </p>
+
+          <div class="card panel">
+            <div class="horizon-form">
+              <div class="horizon-field">
+                <label for="horizon-age">Her age now</label>
+                <input id="horizon-age" data-horizon="age" type="number" min="0" max="18" step="1" value="0" inputmode="numeric" />
+              </div>
+              <div class="horizon-field">
+                <label for="horizon-lump">Starting gift (€)</label>
+                <input id="horizon-lump" data-horizon="lump" type="number" min="0" max="1000000" step="50" value="500" inputmode="decimal" />
+              </div>
+              <div class="horizon-field">
+                <label for="horizon-monthly">Monthly gift (€, optional)</label>
+                <input id="horizon-monthly" data-horizon="monthly" type="number" min="0" max="20000" step="10" value="0" inputmode="decimal" />
+              </div>
+            </div>
+
+            <div data-horizon-ready>
+              <p class="sr-only" data-horizon-summary></p>
+              <div class="horizon-chart-wrap" data-horizon-chart></div>
+              <div class="horizon-readout" data-horizon-readout></div>
+              <div class="rate-pills" aria-label="Example yearly rates">
+                <span><span class="swatch g"></span> Growth example 7%</span>
+                <span><span class="swatch b"></span> Balanced example 4.5%</span>
+                <span><span class="swatch s"></span> Steady example 2%</span>
+              </div>
+            </div>
+            <p class="note" data-horizon-empty hidden></p>
+
+            <p class="disclaimer">
+              <strong>Illustration only — not advice, not a promise.</strong>
+              The coloured areas follow your sleeve mix, each compounding at an <em>example</em> yearly rate
+              (Growth 7%, Balanced 4.5%, Steady 2%). The Parents-decide sleeve is drawn at the Balanced
+              example rate. Recurring gifts are treated as twelve monthly amounts, added on each birthday,
+              then grown. No fees, tax, or inflation. Markets go down as well as up; past or assumed returns
+              are not a guide to what she will have.
+            </p>
           </div>
         </div>
       </section>
@@ -299,8 +355,8 @@
             <article class="card faq-item">
               <h3>Who receives the money?</h3>
               <p>
-                The child, on a dedicated Juniorkonto. Parents act as legal representatives and custodians.
-                No child is named on this page.
+                She does — on a dedicated Juniorkonto. Parents act as legal representatives and custodians.
+                She is not named on this page.
               </p>
             </article>
             <article class="card faq-item">
@@ -324,10 +380,17 @@
               </p>
             </article>
             <article class="card faq-item">
+              <h3>Is the growth chart a promise?</h3>
+              <p>
+                No. The picture to her 18th birthday uses example yearly rates so you can see a mix’s shape.
+                It is not investment advice and not a forecast of what she will have.
+              </p>
+            </article>
+            <article class="card faq-item">
               <h3>What do you store?</h3>
               <p>
-                A preference draft and code, in this browser only (see
-                <a href="privacy.html">Privacy</a>). No KYC, and no payment processor.
+                A preference draft, code, and the numbers you type into the illustration, in this browser only
+                (see <a href="privacy.html">Privacy</a>). No KYC, and no payment processor.
               </p>
             </article>
           </div>
@@ -339,6 +402,7 @@
       <div class="wrap">
         <a class="wordmark" href="index.html">Gift capital</a>
         <nav class="nav-links" aria-label="Footer">
+          <a href="#horizon">Until 18</a>
           <a href="#faq">FAQ</a>
           <a href="privacy.html">Privacy</a>
           <a href="ledger.html">Parent ledger</a>
@@ -348,13 +412,13 @@
         <p>
           This site is not a brokerage. It does not give investment advice and does not buy or sell securities.
           Donors do not buy a sleeve here. It does not process payments, cards, or wallets. Parents remain the
-          custodians; allocation codes are wishes, not trade orders.
+          custodians; allocation codes are wishes, not trade orders. Any growth picture is an illustration only.
         </p>
         <p lang="de">
           Keine Anlageberatung. Kein Wertpapierkauf über diese Seite. Keine Zahlungsabwicklung.
         </p>
         <p>
-          No child is named here. Drafts stay in your browser’s local storage. Read the
+          She is not named here. Drafts stay in your browser’s local storage. Read the
           <a href="privacy.html">privacy note</a>.
         </p>
       </div>
@@ -362,6 +426,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/reference.js"></script>
+    <script src="js/projection.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

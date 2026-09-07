@@ -1,12 +1,12 @@
 # Gift capital
 
-A **public preference desk** for friends and family who want to gift money toward a little one’s long-horizon capital.
+A **public preference desk** for friends and family who want to gift money toward a little girl’s long-horizon capital.
 
 This is **scenario A**: people will later (1) send a SEPA transfer to a dedicated Juniorkonto and (2) say how they would like that gift split across a few portfolio sleeves. Parents are the custodians and invest later. The site is a story plus an allocation helper — **not a brokerage and not a payment processor**.
 
 **Do not transfer yet. Konto folgt.** Until a real Juniorkonto exists, this site does **not** publish an IBAN or BIC — not even a fake DE-looking number, which someone could mistype as a live account.
 
-There is no Stripe, PayPal, or card form. The child is not named. Branding stays generic (“Gift capital”, “a little one’s capital”). Donors never buy a sleeve here.
+There is no Stripe, PayPal, or card form. She is not named. Branding stays generic (“Gift capital”, “a little girl’s capital”). Donors never buy a sleeve here.
 
 **Live site (GitHub Pages):** <https://nza-93.github.io/child-gift-capital/>
 
@@ -28,6 +28,28 @@ The allocation UI works **without a backend**.
 | Parents decide | Leave the mix to the parents. They’ll allocate as custodians. |
 
 These are wishes parents may follow — not a trade order, and not investment advice.
+
+## Illustrative projection (to her 18th birthday)
+
+The public page includes a **picture of potential growth** from a starting gift and optional monthly gifts until age 18. It follows the current sleeve mix. It is **not** a forecast, **not** investment advice, and **not** a promise of what she will have.
+
+Example yearly rates used only for that picture:
+
+| Sleeve | Example annual return | What it is for |
+| --- | --- | --- |
+| Growth | 7% | A round, long-horizon equity-like number for the sketch |
+| Balanced | 4.5% | A round, mixed stocks-and-bonds-like number |
+| Steady | 2% | A round, cash/bonds-like number |
+| Parents decide | 4.5% | Drawn at the Balanced example rate, so the sleeve is visible |
+
+How the sketch is built:
+
+1. Today (her current age) the starting gift is split by the mix.
+2. Each later birthday, twelve monthly gifts (if any) are added in the same mix, then each sleeve is grown by its example rate. Compounding is **once a year**.
+3. The stacked areas are the sleeves; the dark line is their total. Cards underneath compare the mix with “all Growth / all Balanced / all Steady” using the same gifts and the same example rates.
+4. No fees, tax, inflation, or market path. Real results will differ — including losses.
+
+The allocation bar (live mix) shows the four sleeve percentages with a colour legend so the mix is readable on a phone.
 
 ## Preference code
 
@@ -70,17 +92,25 @@ python3 -m http.server 8080
 
 Then open `http://127.0.0.1:8080/`.
 
+Reference and projection checks (no browser):
+
+```bash
+node scripts/check-reference.mjs
+node scripts/check-projection.mjs
+```
+
 ## Repo map
 
 | Path | Role |
 | --- | --- |
-| `index.html` | Landing, allocation UI, how to give, FAQ |
+| `index.html` | Landing, allocation UI, growth-to-18 illustration, how to give, FAQ |
 | `privacy.html` | Privacy + “not advice / not a brokerage” |
 | `ledger.html` | Decode a bank reference |
 | `js/config.js` | Account gate (`accountReady`) — empty until the Juniorkonto exists |
 | `js/reference.js` | Encode / decode `GC1` codes |
+| `js/projection.js` | Illustrative compounding to age 18 + mix bar helper |
 | `ledger/` | CSV + JSON templates and matching README |
 
 ## Legal tone (footer)
 
-The site states, in English and German, that it is **not investment advice** and **does not buy or sell securities**. It does not process payments. Allocation codes are wishes for a parent ledger, not broker orders. Donors do not buy a sleeve on this page.
+The site states, in English and German, that it is **not investment advice** and **does not buy or sell securities**. It does not process payments. Allocation codes are wishes for a parent ledger, not broker orders. Donors do not buy a sleeve on this page. The growth-to-18 chart is labelled as an illustration only.

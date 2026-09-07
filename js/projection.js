@@ -168,11 +168,8 @@
 
   function renderChart(model) {
     var pts = model.points;
-    var w = 480;
-    var h = 240;
-    var m = { top: 14, right: 12, bottom: 36, left: 44 };
-    var innerW = w - m.left - m.right;
-    var innerH = h - m.top - m.bottom;
+    var w = 320;
+    var h = 180;
     var maxRaw = 0;
     pts.forEach(function (p) {
       if (p.total > maxRaw) maxRaw = p.total;
@@ -180,40 +177,33 @@
     var yMax = niceMax(maxRaw * 1.12);
 
     function xAt(i) {
-      if (pts.length === 1) return m.left + innerW / 2;
-      return m.left + (i * innerW) / (pts.length - 1);
+      var pad = 4;
+      if (pts.length === 1) return w / 2;
+      return pad + (i * (w - pad * 2)) / (pts.length - 1);
     }
     function yAt(v) {
-      return m.top + innerH - (v / yMax) * innerH;
+      var pad = 4;
+      return pad + (h - pad * 2) * (1 - v / yMax);
     }
 
     var xs = pts.map(function (_, i) {
       return xAt(i);
     });
 
-    var tickCount = 4;
+    var tickCount = 2;
+    var yTicks = [];
     var grid = "";
     for (var t = 0; t <= tickCount; t++) {
       var val = (yMax * t) / tickCount;
+      yTicks.unshift(val);
       var y = yAt(val);
       grid += svgEl("line", {
-        x1: m.left,
-        x2: w - m.right,
+        x1: 0,
+        x2: w,
         y1: y.toFixed(1),
         y2: y.toFixed(1),
-        class: "grid",
+        class: t === 0 ? "axis" : "grid",
       });
-      grid += svgEl(
-        "text",
-        {
-          x: (m.left - 8).toFixed(1),
-          y: (y + 4).toFixed(1),
-          class: "tick",
-          "text-anchor": "end",
-          "font-size": "11",
-        },
-        formatAxis(val)
-      );
     }
 
     var stacked = "";
@@ -253,57 +243,57 @@
     });
 
     var end = lastPoint(model);
-    var endX = xs[xs.length - 1];
-    var endY = yAt(end.total);
     var endDot = svgEl("circle", {
       class: "end-dot",
-      cx: endX.toFixed(1),
-      cy: endY.toFixed(1),
+      cx: xs[xs.length - 1].toFixed(1),
+      cy: yAt(end.total).toFixed(1),
       r: 5,
     });
 
-    var xLabels = "";
-    var labelIdx = [0];
-    if (pts.length > 2) labelIdx.push(Math.round((pts.length - 1) / 2));
-    if (pts.length > 1) labelIdx.push(pts.length - 1);
+    var xIdx = [0];
+    if (pts.length > 2) xIdx.push(Math.round((pts.length - 1) / 2));
+    if (pts.length > 1) xIdx.push(pts.length - 1);
     var seen = {};
-    labelIdx.forEach(function (i) {
+    var xLabels = [];
+    xIdx.forEach(function (i) {
       if (seen[i]) return;
       seen[i] = true;
-      xLabels += svgEl(
-        "text",
-        {
-          x: xs[i].toFixed(1),
-          y: h - 14,
-          class: "tick x-tick",
-          "text-anchor": i === 0 ? "start" : i === pts.length - 1 ? "end" : "middle",
-          "font-size": "11",
-        },
-        "Age " + pts[i].age
-      );
+      xLabels.push("Age " + pts[i].age);
     });
 
-    var baseline = svgEl("line", {
-      x1: m.left,
-      x2: w - m.right,
-      y1: m.top + innerH,
-      y2: m.top + innerH,
-      class: "axis",
-    });
+    var yHtml = yTicks
+      .map(function (v) {
+        return "<span>" + formatAxis(v) + "</span>";
+      })
+      .join("");
+    var xHtml = xLabels.map(function (label) {
+      return "<span>" + label + "</span>";
+    }).join("");
 
-    return (
+    var svg =
       '<svg class="horizon-svg" viewBox="0 0 ' +
       w +
       " " +
       h +
-      '" role="img" aria-hidden="true" focusable="false">' +
+      '" preserveAspectRatio="none" role="img" aria-hidden="true" focusable="false">' +
       grid +
-      baseline +
       stacked +
       totalLine +
       endDot +
-      xLabels +
-      "</svg>"
+      "</svg>";
+
+    return (
+      '<div class="horizon-plot">' +
+      '<div class="horizon-ylabels" aria-hidden="true">' +
+      yHtml +
+      "</div>" +
+      '<div class="horizon-canvas">' +
+      svg +
+      "</div>" +
+      '<div class="horizon-xlabels" aria-hidden="true">' +
+      xHtml +
+      "</div>" +
+      "</div>"
     );
   }
 

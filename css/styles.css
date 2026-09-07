@@ -354,9 +354,18 @@ a:hover {
   margin-bottom: 0.45rem;
 }
 
-@media (max-width: 380px) {
+@media (max-width: 520px) {
   .mix-legend {
     grid-template-columns: 1fr;
+  }
+
+  .horizon-svg {
+    height: 12.5rem;
+  }
+
+  .horizon-ylabels,
+  .horizon-xlabels {
+    font-size: 0.9rem;
   }
 }
 
@@ -747,17 +756,51 @@ th {
 
 .horizon-chart-wrap {
   margin: 0.2rem 0 0.85rem;
-  padding: 0.35rem 0.2rem 0.15rem;
+  padding: 0.7rem 0.7rem 0.55rem;
   border-radius: 14px;
   background: var(--cream);
   overflow: hidden;
 }
 
+.horizon-plot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 0.35rem 0.45rem;
+  align-items: stretch;
+}
+
+.horizon-ylabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  line-height: 1;
+  padding: 0.1rem 0;
+}
+
+.horizon-canvas {
+  min-width: 0;
+}
+
 .horizon-svg {
   display: block;
   width: 100%;
-  height: auto;
-  min-height: 12.5rem;
+  height: 11.5rem;
+}
+
+.horizon-xlabels {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.2;
 }
 
 .horizon-svg .grid {
@@ -772,7 +815,8 @@ th {
 
 .horizon-svg .tick {
   fill: var(--muted);
-  font-size: 0.75rem;
+  font-size: 13px;
+  font-weight: 650;
   font-family: var(--font-sans);
 }
 

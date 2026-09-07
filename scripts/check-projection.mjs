@@ -79,7 +79,7 @@ assert.equal(at18.years, 0);
 approx("no remaining years", at18.points[0].total, 800);
 
 const svg = P.renderChart(mix);
-assert.ok(svg.indexOf("<svg") === 0, "chart starts with svg");
+assert.ok(svg.indexOf("<svg") !== -1, "chart contains svg");
 assert.ok(svg.indexOf("sleeve-area") !== -1, "stacked sleeves present");
 assert.ok(svg.indexOf("Age 18") !== -1, "labels the 18th birthday");
 

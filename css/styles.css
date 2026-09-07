@@ -421,8 +421,14 @@ a:hover {
 .growth-chart {
   display: block;
   width: 100%;
-  min-width: 32rem;
+  min-width: 24rem;
   height: auto;
+}
+
+@media (min-width: 40rem) {
+  .growth-chart {
+    min-width: 0;
+  }
 }
 
 .growth-figure figcaption {

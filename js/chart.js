@@ -235,7 +235,7 @@
           svgEl("path", {
             d: areaPath(s.points, xOf, yOf, yBase),
             fill: s.color,
-            "fill-opacity": "0.12",
+            "fill-opacity": "0.2",
             stroke: "none",
           })
         );

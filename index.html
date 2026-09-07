@@ -208,11 +208,8 @@
 
       <section class="section" id="horizon" aria-labelledby="horizon-title">
         <div class="wrap">
-          <h2 id="horizon-title">Potential growth to her 18th birthday</h2>
-          <p class="lede">
-            An illustration of how a starting gift, and optional monthly gifts, might look by the time she
-            turns 18 — using your mix and example yearly rates. It is a picture, not a forecast.
-          </p>
+          <h2 id="horizon-title">If a gift could grow until her 18th birthday</h2>
+          <p class="lede">A gentle illustration — not a promise, forecast, or advice.</p>
 
           <div class="card panel">
             <div class="horizon-form">
@@ -229,26 +226,33 @@
                 <input id="horizon-monthly" data-horizon="monthly" type="number" min="0" max="20000" step="10" value="0" inputmode="decimal" />
               </div>
             </div>
+            <p class="note horizon-hint">
+              A one-off example gift in nominal euros — not her real account, not a
+              <span lang="de">Schenkung</span> outcome, and not a transfer. Optional monthly gifts default to 0.
+            </p>
 
             <div data-horizon-ready>
               <p class="sr-only" data-horizon-summary></p>
               <div class="horizon-chart-wrap" data-horizon-chart></div>
+              <p class="chart-caption">
+                Simple constant rates for illustration — markets go up and down; this is not a promise, forecast, or advice.
+              </p>
               <div class="horizon-readout" data-horizon-readout></div>
               <div class="rate-pills" aria-label="Example yearly rates">
-                <span><span class="swatch g"></span> Growth example 7%</span>
-                <span><span class="swatch b"></span> Balanced example 4.5%</span>
-                <span><span class="swatch s"></span> Steady example 2%</span>
+                <span><span class="swatch g"></span> Growth 6%</span>
+                <span><span class="swatch b"></span> Balanced 4%</span>
+                <span><span class="swatch s"></span> Steady 2%</span>
+                <span class="is-muted"><span class="swatch is-muted"></span> Parents decide — not plotted</span>
               </div>
             </div>
             <p class="note" data-horizon-empty hidden></p>
 
             <p class="disclaimer">
-              <strong>Illustration only — not advice, not a promise.</strong>
-              The coloured areas follow your sleeve mix, each compounding at an <em>example</em> yearly rate
-              (Growth 7%, Balanced 4.5%, Steady 2%). The Parents-decide sleeve is drawn at the Balanced
-              example rate. Recurring gifts are treated as twelve monthly amounts, added on each birthday,
-              then grown. No fees, tax, or inflation. Markets go down as well as up; past or assumed returns
-              are not a guide to what she will have.
+              <strong>Nominal euros.</strong>
+              Constant annual returns: Growth 6% · Balanced 4% · Steady 2%. Default one-off €500.
+              No fees and no tax in this picture. Optional monthly gifts, if you type them, are treated as
+              twelve amounts added on each birthday, then grown. This is not her real account path and not a
+              <span lang="de">Schenkung</span> outcome. Parents decide is not plotted — no invented path.
             </p>
           </div>
         </div>
@@ -382,8 +386,8 @@
             <article class="card faq-item">
               <h3>Is the growth chart a promise?</h3>
               <p>
-                No. The picture to her 18th birthday uses example yearly rates so you can see a mix’s shape.
-                It is not investment advice and not a forecast of what she will have.
+                No. It is a gentle illustration with constant rates — not a promise, forecast, or advice,
+                and not her real account.
               </p>
             </article>
             <article class="card faq-item">

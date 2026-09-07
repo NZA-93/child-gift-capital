@@ -105,7 +105,7 @@
   function renderChart(svg, amount) {
     var width = 520;
     var height = 340;
-    var pad = { top: 30, right: 18, bottom: 52, left: 64 };
+    var pad = { top: 30, right: 18, bottom: 52, left: 72 };
     var innerW = width - pad.left - pad.right;
     var innerH = height - pad.top - pad.bottom;
     var yBase = pad.top + innerH;

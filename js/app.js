@@ -1,7 +1,9 @@
 (function () {
   var cfg = window.GIFT_CAPITAL;
   var Ref = window.GiftReference;
+  var Proj = window.GiftProjection;
   var STORAGE_KEY = "gift-capital-draft-v1";
+  var HORIZON_KEY = "gift-capital-horizon-v1";
 
   var PRESETS = [
     { id: "growth", label: "All growth", growth: 100, balanced: 0, steady: 0, parents: 0 },
@@ -19,6 +21,9 @@
     parents: 0,
     tokenStem: "",
     preset: "mostly",
+    age: 0,
+    lump: 500,
+    monthly: 0,
   };
 
   function $(sel, root) {
@@ -45,6 +50,36 @@
       state.preset = matchPreset(state) || "custom";
     } catch (e) {
       /* ignore quota / parse errors */
+    }
+  }
+
+  function loadHorizon() {
+    try {
+      var raw = localStorage.getItem(HORIZON_KEY);
+      if (!raw) return;
+      var draft = JSON.parse(raw);
+      if (!draft || typeof draft !== "object") return;
+      if (draft.age != null) state.age = Proj.clamp(Math.round(Number(draft.age)), 0, 18);
+      if (draft.lump != null) state.lump = Proj.clamp(Number(draft.lump), 0, 1000000);
+      if (draft.monthly != null) state.monthly = Proj.clamp(Number(draft.monthly), 0, 20000);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function saveHorizon() {
+    try {
+      localStorage.setItem(
+        HORIZON_KEY,
+        JSON.stringify({
+          age: state.age,
+          lump: state.lump,
+          monthly: state.monthly,
+          updatedAt: new Date().toISOString(),
+        })
+      );
+    } catch (e) {
+      /* ignore */
     }
   }
 
@@ -114,6 +149,7 @@
     how: true,
     sleeves: true,
     allocate: true,
+    horizon: true,
     give: true,
     faq: true,
   };
@@ -170,18 +206,81 @@
     return Ref.encode(currentAlloc(), state.tokenStem);
   }
 
-  function renderMix(el, alloc) {
-    if (!el) return;
-    el.innerHTML =
-      '<span class="g" style="flex:' +
-      alloc.growth +
-      '"></span><span class="b" style="flex:' +
-      alloc.balanced +
-      '"></span><span class="s" style="flex:' +
-      alloc.steady +
-      '"></span><span class="p" style="flex:' +
-      alloc.parents +
-      '"></span>';
+  function renderHorizon() {
+    var ready = $("[data-horizon-ready]");
+    var empty = $("[data-horizon-empty]");
+    var chart = $("[data-horizon-chart]");
+    var readout = $("[data-horizon-readout]");
+    var summary = $("[data-horizon-summary]");
+    if (!ready || !empty) return;
+
+    var alloc = currentAlloc();
+    var ok = Ref.validateAlloc(alloc) === "";
+    var hasMoney = state.lump > 0 || state.monthly > 0;
+
+    $all('[data-horizon]').forEach(function (input) {
+      var key = input.getAttribute("data-horizon");
+      if (document.activeElement === input) return;
+      input.value = state[key];
+    });
+
+    if (!ok) {
+      ready.hidden = true;
+      empty.hidden = false;
+      empty.textContent = "The illustration appears when the four sleeves add up to 100%.";
+      return;
+    }
+    if (!hasMoney) {
+      ready.hidden = true;
+      empty.hidden = false;
+      empty.textContent = "Enter a starting gift or a monthly gift to see the illustration.";
+      return;
+    }
+
+    var model = Proj.project({
+      age: state.age,
+      lump: state.lump,
+      monthly: state.monthly,
+      alloc: alloc,
+    });
+    var end = Proj.lastPoint(model);
+    var endMix = Proj.formatEur(end.total);
+    var endGrowth = Proj.formatEur(model.comparison.growth[model.comparison.growth.length - 1]);
+    var endBalanced = Proj.formatEur(model.comparison.balanced[model.comparison.balanced.length - 1]);
+    var endSteady = Proj.formatEur(model.comparison.steady[model.comparison.steady.length - 1]);
+
+    ready.hidden = false;
+    empty.hidden = true;
+    if (chart) chart.innerHTML = Proj.renderChart(model);
+    if (readout) {
+      readout.innerHTML =
+        '<div class="horizon-stat is-mix"><span class="label">Your mix at 18</span><span class="value">' +
+        endMix +
+        '</span></div><div class="horizon-stat"><span class="label">All Growth example</span><span class="value">' +
+        endGrowth +
+        '</span></div><div class="horizon-stat"><span class="label">All Balanced example</span><span class="value">' +
+        endBalanced +
+        '</span></div><div class="horizon-stat"><span class="label">All Steady example</span><span class="value">' +
+        endSteady +
+        "</span></div>";
+    }
+    if (summary) {
+      summary.textContent =
+        model.years === 0
+          ? "She is already 18 in this illustration. Illustrated capital: " + endMix + "."
+          : "Illustrated capital at her 18th birthday, from age " +
+            model.age +
+            ": " +
+            endMix +
+            ". Example all-Growth " +
+            endGrowth +
+            ", all-Balanced " +
+            endBalanced +
+            ", all-Steady " +
+            endSteady +
+            ".";
+    }
+    saveHorizon();
   }
 
   function render() {
@@ -218,7 +317,8 @@
       btn.setAttribute("aria-pressed", btn.getAttribute("data-preset") === state.preset ? "true" : "false");
     });
 
-    renderMix($("#live-mix"), alloc);
+    Proj.renderMix($("#live-mix"), $("#live-mix-legend"), alloc);
+    renderHorizon();
 
     var result = encoded();
     if (result.ok) {
@@ -367,6 +467,20 @@
     });
   }
 
+  function bindHorizon() {
+    $all("[data-horizon]").forEach(function (input) {
+      var key = input.getAttribute("data-horizon");
+      input.addEventListener("input", function () {
+        var n = Number(input.value);
+        if (key === "age") n = Math.round(n);
+        if (key === "age") state.age = Proj.clamp(n, 0, 18);
+        else if (key === "lump") state.lump = Proj.clamp(n, 0, 1000000);
+        else if (key === "monthly") state.monthly = Proj.clamp(n, 0, 20000);
+        renderHorizon();
+      });
+    });
+  }
+
   function bindNewDraft() {
     var btn = $("[data-new-draft]");
     if (!btn) return;
@@ -377,6 +491,7 @@
   }
 
   loadDraft();
+  loadHorizon();
   applyHash();
   if (!state.tokenStem) {
     var first = Ref.encode(currentAlloc());
@@ -387,5 +502,6 @@
   bindPresets();
   bindCopy();
   bindNewDraft();
+  bindHorizon();
   render();
 })();

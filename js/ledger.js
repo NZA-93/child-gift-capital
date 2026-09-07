@@ -27,7 +27,7 @@
       '<p class="code-block">' +
       escapeHtml(decoded.code) +
       "</p>" +
-      '<div class="mix" id="decoded-mix" aria-hidden="true"></div>' +
+      '<div class="mix-visual"><div class="mix" id="decoded-mix" role="img" aria-label="Decoded mix"></div><ul class="mix-legend" id="decoded-mix-legend"></ul></div>' +
       '<div class="table-wrap"><table><thead><tr><th>Sleeve</th><th>%</th></tr></thead><tbody>' +
       row("Growth", a.growth) +
       row("Balanced", a.balanced) +
@@ -42,17 +42,20 @@
       "</div>";
 
     var mix = document.getElementById("decoded-mix");
-    if (mix) {
+    var legend = document.getElementById("decoded-mix-legend");
+    if (window.GiftProjection) {
+      window.GiftProjection.renderMix(mix, legend, a);
+    } else if (mix) {
       mix.innerHTML =
-        '<span class="g" style="flex:' +
+        '<span class="g" style="flex-grow:' +
         a.growth +
-        '"></span><span class="b" style="flex:' +
+        ';flex-basis:0"></span><span class="b" style="flex-grow:' +
         a.balanced +
-        '"></span><span class="s" style="flex:' +
+        ';flex-basis:0"></span><span class="s" style="flex-grow:' +
         a.steady +
-        '"></span><span class="p" style="flex:' +
+        ';flex-basis:0"></span><span class="p" style="flex-grow:' +
         a.parents +
-        '"></span>';
+        ';flex-basis:0"></span>';
     }
 
     if (raw && decoded.code && history.replaceState) {

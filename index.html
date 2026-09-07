@@ -6,7 +6,7 @@
     <title>Gift capital — a preference desk for long-horizon gifts</title>
     <meta
       name="description"
-      content="A quiet way for family and friends to gift money toward a little one’s long-horizon capital, and to say how they would like that gift looked after. Not a broker. Not a payment processor."
+      content="A quiet way for family and friends to gift money toward her long-horizon capital, and to say how they would like that gift looked after. Not a broker. Not a payment processor."
     />
     <meta name="theme-color" content="#ebe4d4" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -26,6 +26,7 @@
           Gift capital
         </a>
         <nav class="nav-links" aria-label="Primary">
+          <a href="#growth">Until 18</a>
           <a href="#allocate">Allocate</a>
           <a href="#give">How to give</a>
           <a href="#faq">FAQ</a>
@@ -42,7 +43,7 @@
           <p class="lede">
             This is a preference desk and a story — not a shop, not a broker, and not a place that takes your card.
             You say how you would like a gift allocated across a few simple sleeves. Parents, as custodians, look
-            after the capital later. Until the dedicated Juniorkonto is open, please do not transfer money.
+            after her capital later. Until the dedicated Juniorkonto is open, please do not transfer money.
           </p>
           <div class="actions">
             <a class="btn" href="#allocate">Choose an allocation</a>
@@ -55,12 +56,12 @@
         <div class="wrap prose">
           <h2 id="why-title">Why capital from the beginning</h2>
           <p>
-            A life is long. Money given early — even a modest amount — can sit and compound while a little one
-            learns to walk, to read, to choose a path. This page exists so people who love that child can
+            A life is long. Money given early — even a modest amount — can sit and compound while she
+            learns to walk, to read, to choose a path. This page exists so people who love her can
             contribute to a dedicated pot, without turning a birth into a catalogue or a payment form.
           </p>
           <p>
-            The child is not named here on purpose. The branding stays generic:
+            She is not named here on purpose. The branding stays generic:
             <strong>gift capital for a little one</strong>. Parents hold any future account as custodians.
             Your allocation is a wish they may follow — not an order, and not a way to buy a sleeve or any
             security through this site.
@@ -100,7 +101,7 @@
       <section class="section" id="sleeves" aria-labelledby="sleeves-title">
         <div class="wrap">
           <h2 id="sleeves-title">The four sleeves</h2>
-          <p class="lede">Parents, as custodians, invest later. These labels are a shared language for your wish — not something you buy here.</p>
+          <p class="lede">Parents, as custodians, invest for her later. These labels are a shared language for your wish — not something you buy here.</p>
           <div class="grid-2">
             <article class="card sleeve-card">
               <h3>Growth</h3>
@@ -118,6 +119,78 @@
               <h3>Parents decide</h3>
               <p>Leave the mix to the parents. They’ll allocate as custodians.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="growth" aria-labelledby="growth-title">
+        <div class="wrap">
+          <h2 id="growth-title">If a gift could grow until her 18th birthday</h2>
+          <p class="lede">A gentle illustration — not a promise, forecast, or advice.</p>
+
+          <div class="card panel growth-card">
+            <div class="amount-row" data-growth-amount>
+              <label for="gift-amount">Example one-off gift</label>
+              <div class="pct">
+                <span aria-hidden="true">€</span>
+                <input
+                  id="gift-amount"
+                  data-gift-amount
+                  type="number"
+                  min="50"
+                  max="5000"
+                  step="50"
+                  value="500"
+                  inputmode="numeric"
+                />
+              </div>
+              <p class="hint">
+                A single example gift imagined from today — not her real account, not a
+                <span lang="de">Schenkung</span> outcome, and not a transfer.
+              </p>
+              <label class="sr-only" for="range-amount">Example gift amount</label>
+              <input
+                id="range-amount"
+                data-gift-range
+                type="range"
+                min="50"
+                max="5000"
+                step="50"
+                value="500"
+              />
+            </div>
+
+            <figure class="growth-figure">
+              <svg
+                id="growth-chart"
+                class="growth-chart"
+                viewBox="0 0 640 400"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-labelledby="growth-title"
+              ></svg>
+              <noscript>
+                <p class="note">
+                  The illustration needs JavaScript in this browser. It is still not a promise, forecast, or advice.
+                </p>
+              </noscript>
+              <figcaption>
+                Based on simple constant returns Portfolio sets; markets go up and down; past ≠ future.
+              </figcaption>
+            </figure>
+
+            <ul class="growth-legend" data-growth-legend></ul>
+
+            <dl class="growth-assumptions">
+              <dt>Portfolio assumptions</dt>
+              <dd>Nominal euros (not inflation-adjusted).</dd>
+              <dd>Constant annual returns: Growth 6% · Balanced 4% · Steady 2%.</dd>
+              <dd>Example one-off gift default €500, imagined for 18 years from today.</dd>
+              <dd>No fees and no tax in this picture. Parents decide is not plotted — no invented path.</dd>
+            </dl>
+
+            <p class="note growth-disclaimer">
+              Simple constant rates for illustration — markets go up and down; this is not a promise, forecast, or advice.
+            </p>
           </div>
         </div>
       </section>
@@ -299,8 +372,8 @@
             <article class="card faq-item">
               <h3>Who receives the money?</h3>
               <p>
-                The child, on a dedicated Juniorkonto. Parents act as legal representatives and custodians.
-                No child is named on this page.
+                She does — on a dedicated Juniorkonto. Parents act as legal representatives and custodians.
+                She is not named on this page.
               </p>
             </article>
             <article class="card faq-item">
@@ -315,6 +388,13 @@
               <p>
                 No. Do not transfer yet — <span lang="de">Konto folgt</span> — until the account is published
                 on this page.
+              </p>
+            </article>
+            <article class="card faq-item">
+              <h3>Is the chart her real account?</h3>
+              <p>
+                No. It is a gentle illustration with constant rates — not a promise, forecast, or advice,
+                and not a <span lang="de">Schenkung</span> outcome.
               </p>
             </article>
             <article class="card faq-item">
@@ -339,6 +419,7 @@
       <div class="wrap">
         <a class="wordmark" href="index.html">Gift capital</a>
         <nav class="nav-links" aria-label="Footer">
+          <a href="#growth">Until 18</a>
           <a href="#faq">FAQ</a>
           <a href="privacy.html">Privacy</a>
           <a href="ledger.html">Parent ledger</a>
@@ -354,7 +435,7 @@
           Keine Anlageberatung. Kein Wertpapierkauf über diese Seite. Keine Zahlungsabwicklung.
         </p>
         <p>
-          No child is named here. Drafts stay in your browser’s local storage. Read the
+          She is not named here. Drafts stay in your browser’s local storage. Read the
           <a href="privacy.html">privacy note</a>.
         </p>
       </div>
@@ -362,6 +443,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/reference.js"></script>
+    <script src="js/chart.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

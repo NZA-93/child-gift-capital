@@ -113,6 +113,7 @@
     why: true,
     how: true,
     sleeves: true,
+    growth: true,
     allocate: true,
     give: true,
     faq: true,

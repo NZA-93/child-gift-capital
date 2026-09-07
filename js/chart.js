@@ -103,9 +103,9 @@
   }
 
   function renderChart(svg, amount) {
-    var width = 640;
-    var height = 400;
-    var pad = { top: 32, right: 108, bottom: 58, left: 70 };
+    var width = 520;
+    var height = 340;
+    var pad = { top: 30, right: 18, bottom: 52, left: 64 };
     var innerW = width - pad.left - pad.right;
     var innerH = height - pad.top - pad.bottom;
     var yBase = pad.top + innerH;
@@ -262,16 +262,6 @@
           fill: s.color,
         })
       );
-      var endLabel = svgEl("text", {
-        x: String(endX + 10),
-        y: String(endY + 4),
-        fill: s.color,
-        "font-size": "13",
-        "font-weight": "650",
-        "font-family": "Avenir Next, Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif",
-      });
-      endLabel.textContent = s.label + " " + formatEuro(s.end);
-      svg.appendChild(endLabel);
     });
 
     return computed;
